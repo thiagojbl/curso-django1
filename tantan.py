@@ -1,1 +1,2 @@
 print('estagiário')
+# insert('estagiário')
