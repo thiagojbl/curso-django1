@@ -17,16 +17,10 @@ from curses.ascii import HT
 
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
-
-
-# HTTP RESQUEST
-def my_view(request):
-    return HttpResponse('Uma linda string')
-    # return HTTP response
-
+from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('sobre/', my_view),
+    path("admin/", admin.site.urls),
+    path("receita/", include("receita.urls")),
+    path("", include("core.urls")),
 ]
