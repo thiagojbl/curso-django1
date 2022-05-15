@@ -12,11 +12,3 @@ def home(request):
             "name": "Thiago José",
         },
     )
-
-
-def sobre(request):
-    return HttpResponse("recipes/Sobre")
-
-
-def contato(request):
-    return HttpResponse("recipes/Contato")
