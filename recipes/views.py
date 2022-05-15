@@ -7,7 +7,7 @@ from django.shortcuts import render
 def home(request):
     return render(
         request,
-        "recipes/home.html",
+        "recipes/pages/home.html",
         context={
             "name": "Thiago José",
         },
