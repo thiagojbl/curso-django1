@@ -11,3 +11,14 @@ def home(request):
             "name": "Thiago José",
         },
     )
+
+
+# Create your views here.
+def recipes(request, id):
+    return render(
+        request,
+        "recipes/pages/recipes-view.html",
+        context={
+            "name": "Thiago José",
+        },
+    )
