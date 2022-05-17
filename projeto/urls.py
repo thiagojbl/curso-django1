@@ -1,5 +1,3 @@
-from curses.ascii import HT
-
 from django.contrib import admin
 from django.urls import include, path
 
