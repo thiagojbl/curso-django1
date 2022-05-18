@@ -20,6 +20,7 @@ def recipes(request, id):
         # "base_templates/global/base.html",
         "recipes/pages/recipes-view.html",
         context={
-            "recipe": make_recipe,
+            "recipe": make_recipe(),
+            "is_detail_page": True,
         },
     )
