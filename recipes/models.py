@@ -1,5 +1,3 @@
-from unittest.suite import _TestType
-
 from django.contrib.auth.models import User
 from django.db import models
 
