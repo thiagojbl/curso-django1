@@ -131,3 +131,6 @@ db copy.sqlite3
 
 # Add again for course purpose
 # !db.sqlite3
+
+*venv.txt
+*vscode.txt
