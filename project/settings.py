@@ -76,7 +76,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+# alterar diretório sqlite3 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
