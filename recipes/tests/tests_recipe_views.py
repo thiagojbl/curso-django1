@@ -1,15 +1,18 @@
-# from urllib import response
 
-from django.test import TestCase
+from unittest import skip
+
 from django.urls import resolve, reverse
 from recipes import views
-from recipes.models import Category, Recipe, User
+
+from .test_recipe_base import RecipeTestBase
 
 
-class RecipeViewTest(TestCase):
+# @skip('A mensagem do porquê  eu estou pulando esses testes')
+class RecipeViewTest(RecipeTestBase):
     def test_recipe_home_view_function_is_correct(self):
         view = resolve(reverse('recipes:home'))
         self.assertIs(view.func, views.home)
+    # tearDown
 
     def test_recipe_home_view_returns_status_code_200_ok(self):
         response = self.client.get(reverse('recipes:home'))
@@ -19,34 +22,40 @@ class RecipeViewTest(TestCase):
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
+    # @skip('WIP')
     def test_recipe_home_temlate_shows_no_recipes_found_if_no_resciples(self):
+        #  apagar receita
+        # Recipe.objects.get(pk=1).delete()
         response = self.client.get(reverse('recipes:home'))
         self.assertIn('No recipes found', response.content.decode('utf-8'))
 
+        # Tenho que escrever mais algumas coisas sobre o test
+        # self.fail('Para que eu temine de digitá-lo!')
+
     def test_recipe_home_template_loads_recipes(self):
-        category = Category.objects.create(name='Category')
-        author = User.objects.create_user(
-            first_name='user',
-            last_name='name',
-            username='username',
-            password='123456',
-            email='username@email.com',
-        )
-        recipe = Recipe.objects.create(
-            category=category,
-            author=author,
-            title='Recipe Title',
-            description='Recipe Description',
-            slug='recipe-slug',
-            preparation_time=10,
-            preparation_time_unit='Minutos',
-            servings_time=5,
-            servings_time_unit='Porções',
-            preparation_steps='Recipe Preparation Steps',
-            preparation_steps_is_html=False,
-            is_published=True,
-        )
-        assert 1 == 1
+        # response_recipes = response.context['recipes']
+        # verifica o tamanho da lista recipes
+        # self.assertEqual(len(response.context['recipes']), 1)
+        # Testa de o título está correto
+        # self.assertEqual(response_recipes.first().title, 'Recipe Title')
+        # Verificando o contexto
+        self.make_recipe(preparation_time=5,
+                         author_data={
+                             'first_name': 'Joãozinho'
+                         },
+                         category_data={
+                             'name': 'Café da manhã'
+                         })
+        response = self.client.get(reverse('recipes:home'))
+        content = response.content.decode('utf-8')
+        response_context_recipes = response.context['recipes']
+
+        self.assertIn('Recipe Title', content)
+        self.assertIn('5 Minutos', content)
+        self.assertIn('5 Porções', content)
+        self.assertIn('Joãozinho', content)
+        self.assertIn('Café da manhã', content)
+        self.assertEqual(len(response_context_recipes), 1)
 
     def test_recipe_category_view_function_is_correct(self):
         view = resolve(reverse("recipes:category", kwargs={"category_id": 1}))
