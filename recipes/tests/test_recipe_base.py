@@ -1,6 +1,4 @@
 
-from unicodedata import category
-
 from django.test import TestCase
 from recipes.models import Category, Recipe, User
 
