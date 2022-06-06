@@ -5,8 +5,11 @@ from recipes.models import Recipe
 
 # from utils.recipes.factory import make_recipe
 
+#
+# for i in range(10): r.id = None; r.save()
+# for i, recipe in enumerate(r): recipe.title = recipe.title+str(i+1); recipe.save()
 
-# Create your views here.
+
 def home(request):
     recipes = Recipe.objects.filter(is_published=True).order_by("-id")
     return render(
@@ -42,11 +45,6 @@ def category(request, category_id):
 
 # Create your views here.
 def recipes(request, id):
-    # recipe = Recipe.objects.filter(
-    #     id=id,
-    #     is_published=True,
-    # ).first()
-
     recipe = get_object_or_404(
         Recipe,
         pk=id,
@@ -60,3 +58,7 @@ def recipes(request, id):
             "is_detail_page": True,
         },
     )
+
+
+def search(request):
+    ...
