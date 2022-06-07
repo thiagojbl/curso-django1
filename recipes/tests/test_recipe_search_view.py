@@ -30,3 +30,17 @@ class RecipeSearchViewTest(RecipeTestBase):
             'search for &quot;&lt;Teste&gt;&quot;',
             response.content.decode('utf-8')
         )
+
+    def test_recipe_search_can_find_recipe_by_title(self):
+        title1 = 'This is recipe one'
+        title2 = 'This is recipe two'
+
+        recipe1 = self.make_recipe(
+            slug='one', title=title1, author_data={'username': 'one'}
+        )
+
+        recipe2 = self.make_recipe(
+            slug='two', title=title2, author_data={'username': 'two'}
+        )
+
+        search_url = reverse('recipes:search')

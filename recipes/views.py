@@ -1,7 +1,6 @@
 # from django.http import Http404
-import re
-from turtle import title
 
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 
@@ -70,8 +69,14 @@ def search(request):
         raise Http404()
 
     recipes = Recipe.objects.filter(
-        title__icontains=search_term,
-    ).order_by('-id')
+        Q(
+            Q(title__icontains=search_term) |
+            Q(description__icontains=search_term),
+        ),
+        is_published=False
+    )
+    # recipes = recipes.filter(is_published=True)
+    recipes = recipes.order_by('-id')
 
     return render(request, 'recipes/pages/search.html', {
         'page_title': f'search for "{search_term}"',
