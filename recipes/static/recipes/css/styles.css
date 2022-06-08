@@ -218,7 +218,6 @@ h6 {
     flex-flow: column nowrap;
     flex-shrink: 1;
     flex-grow: 1;
-    text-align: center;
 }
 
 .recipe-meta-title {
@@ -289,6 +288,29 @@ h6 {
     margin:2rem;
     padding:0 2rem;
 }
+
+.pagination-content{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem 0.5rem;
+    align-items: center; 
+}
+.pagination .page-item{
+    background: var(--color-gray-3);
+    padding: 0.5rem 1rem;
+}
+.pagination .page-link{
+    text-decoration: None;
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+.pagination .page-current{
+    background: var(--color-primary-dark);
+}
+
+
+
+
 
 .center{
     text-align: center;
