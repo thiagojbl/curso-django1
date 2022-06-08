@@ -73,7 +73,7 @@ def search(request):
             Q(title__icontains=search_term) |
             Q(description__icontains=search_term),
         ),
-        is_published=False
+        is_published=True
     )
     # recipes = recipes.filter(is_published=True)
     recipes = recipes.order_by('-id')
