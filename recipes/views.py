@@ -26,6 +26,8 @@ def home(request):
     page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
 
     messages.success(request, 'Olá, uma mensagem de sucesso!')
+    messages.warning(request, 'Olá, uma mensagem de sucesso!')
+    messages.error(request, 'Olá, uma mensagem de sucesso!')
 
     return render(
         request,
